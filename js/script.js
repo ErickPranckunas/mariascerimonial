@@ -221,6 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     
     // Function to update the active slide
+    // Hero Slider Functionality - Correção para a segunda categoria
     function updateHeroSlide(index) {
         // Remove active class from all slides and dots
         heroSlides.forEach(slide => {
@@ -263,92 +264,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         heroCurrentSlide = index;
     }
-
-    // Função para alinhar textos e corrigir sobreposições nos slides
-    const alignTextElements = () => {
-        // Alinhar textos nos slides do hero
-        const heroContents = document.querySelectorAll('.hero-content');
-        heroContents.forEach((content, index) => {
-            // Redefinir estilos para evitar conflitos
-            content.style.display = 'block';
-            content.style.position = 'absolute';
-            content.style.textAlign = 'center';
-            
-            // Posicionamento básico
-            content.style.width = '100%';
-            content.style.left = '0';
-            content.style.right = '0';
-            content.style.margin = '0 auto';
-            
-            // Posicionamento vertical - ajustado para evitar sobreposição
-            content.style.top = '50%';
-            content.style.transform = 'translateY(-50%)';
-            content.style.bottom = 'auto';
-            
-            // Garantir espaço para os controles de navegação
-            content.style.padding = '0 60px 60px'; // Aumentar padding lateral e inferior
-            content.style.maxWidth = '100%';
-            content.style.boxSizing = 'border-box';
-        });
-        
-        // Alinhar títulos em todos os slides
-        const slideTitles = document.querySelectorAll('.hero-slide h1, .hero-slide h2, .hero-content h1, .hero-content h2');
-        slideTitles.forEach((title) => {
-            title.style.textAlign = 'center';
-            title.style.width = '100%';
-            title.style.margin = '0 auto 20px auto';
-            title.style.maxWidth = '800px';
-            title.style.lineHeight = '1.2';
-            title.style.display = 'block';
-            title.style.position = 'relative';
-            title.style.fontSize = 'calc(2.2rem + 1vw)';
-            title.style.marginBottom = '20px';
-        });
-        
-        // Padronizar botões em todos os slides e evitar sobreposição
-        const heroButtons = document.querySelectorAll('.hero-content .btn');
-        heroButtons.forEach(btn => {
-            btn.style.display = 'inline-block';
-            btn.style.margin = '20px auto 0';
-            btn.style.minWidth = '180px';
-            btn.style.textAlign = 'center';
-            btn.style.position = 'relative';
-            btn.style.zIndex = '10'; // Maior que os controles de navegação
-        });
-        
-        // Ajustar controles de navegação do slider
-        const sliderControls = document.querySelectorAll('.hero-dots');
-        sliderControls.forEach(control => {
-            control.style.position = 'absolute';
-            control.style.bottom = '20px';
-            control.style.width = '100%';
-            control.style.display = 'flex';
-            control.style.justifyContent = 'center';
-            control.style.zIndex = '5';
-        });
-        
-        // Ajustar botões de navegação prev/next para evitar sobreposição
-        const navButtons = document.querySelectorAll('.hero-prev, .hero-next');
-        navButtons.forEach(btn => {
-            btn.style.position = 'absolute';
-            btn.style.top = '50%';
-            btn.style.transform = 'translateY(-50%)';
-            btn.style.zIndex = '5';
-            
-            // Ajustar posicionamento para evitar sobreposição com o CTA
-            if (btn.classList.contains('hero-prev')) {
-                btn.style.left = '20px';
-            } else {
-                btn.style.right = '20px';
-            }
-        });
-    };
     
     // Verificar se os elementos do hero slider existem
     if (heroSlides.length > 0 && heroDots.length > 0) {
         // Garantir que o primeiro slide esteja ativo no carregamento
         updateHeroSlide(0);
         
+        // Resto do código permanece igual...
         // Definir a imagem inicial
         const heroSection = document.querySelector('.hero');
         if (heroSection) {
@@ -385,16 +307,115 @@ document.addEventListener('DOMContentLoaded', function() {
             if (newIndex >= heroSlides.length) newIndex = 0;
             updateHeroSlide(newIndex);
         }, 5000);
-        
-        // Executar alinhamento no carregamento da página
-        alignTextElements();
-        
-        // Executar novamente quando a janela for redimensionada
-        window.addEventListener('resize', alignTextElements);
     }
     
-    // Remover a função duplicada de alignTextElements
-    // (Havia duas definições da mesma função no código original)
+    // Adicionar classe para alinhamento de texto em todos os slides e seções
+    const alignTextElements = () => {
+        // Alinhar textos nos slides do hero
+        const heroContents = document.querySelectorAll('.hero-content');
+        heroContents.forEach((content, index) => {
+            // Redefinir estilos para evitar conflitos
+            content.style.display = 'block';
+            content.style.position = 'absolute';
+            content.style.textAlign = 'center';
+            
+            // Posicionamento básico
+            content.style.width = '100%';
+            content.style.left = '0';
+            content.style.right = '0';
+            content.style.margin = '0 auto';
+            
+            // Posicionamento vertical - posicionar mais abaixo
+            content.style.top = '65%'; // Usar top em vez de bottom
+            content.style.bottom = 'auto';
+            content.style.transform = 'none';
+            
+            content.style.padding = '0 20px';
+            
+            // Ajuste específico para o primeiro slide (casamento)
+            if (index === 0) {
+                content.style.top = '65%'; // Mesmo valor para manter consistência
+                content.style.maxWidth = '100%';
+                content.style.boxSizing = 'border-box';
+            }
+            
+            // Ajustes responsivos para dispositivos móveis
+            if (window.innerWidth <= 768) {
+                content.style.top = '55%'; // Posicionar mais acima em telas pequenas
+                content.style.padding = '0 15px 60px'; // Mais espaço abaixo para o botão
+                
+                // Ajuste específico para o slide corporativo em mobile
+                if (index === 1) {
+                    content.style.top = '50%'; // Ainda mais acima para o slide corporativo
+                }
+            }
+        });
+        
+        // Alinhar títulos em todos os slides com alinhamento perfeito
+        const slideTitles = document.querySelectorAll('.hero-slide h1, .hero-slide h2, .hero-content h1, .hero-content h2');
+        slideTitles.forEach((title) => {
+            title.style.textAlign = 'center';
+            title.style.width = '100%';
+            title.style.margin = '0 auto 20px auto';
+            title.style.maxWidth = '800px';
+            title.style.lineHeight = '1.2';
+            title.style.display = 'block';
+            title.style.position = 'relative';
+            
+            // Ajuste específico para o título do primeiro slide
+            if (title.textContent.includes('Transformamos')) {
+                title.style.fontSize = 'calc(2.2rem + 1vw)';
+                title.style.marginBottom = '20px';
+                title.style.maxWidth = '100%';
+            }
+            
+            // Ajustes responsivos para dispositivos móveis
+            if (window.innerWidth <= 768) {
+                title.style.fontSize = 'calc(1.8rem + 1vw)'; // Fonte menor em mobile
+                title.style.marginBottom = '15px'; // Menos espaço abaixo
+                title.style.lineHeight = '1.3'; // Melhor espaçamento entre linhas
+            }
+        });
+        
+        // Ajustes para parágrafos em dispositivos móveis
+        const slideDescriptions = document.querySelectorAll('.hero-content p:not(.btn)');
+        slideDescriptions.forEach(desc => {
+            // Ajustes responsivos para dispositivos móveis
+            if (window.innerWidth <= 768) {
+                desc.style.fontSize = 'calc(0.9rem + 0.2vw)'; // Fonte menor
+                desc.style.marginBottom = '15px'; // Menos espaço
+                desc.style.maxWidth = '100%'; // Largura total
+            }
+        });
+        
+        // Ajustes para botões em dispositivos móveis
+        const heroButtons = document.querySelectorAll('.hero-content .btn');
+        heroButtons.forEach(btn => {
+            // Ajustes responsivos para dispositivos móveis
+            if (window.innerWidth <= 768) {
+                btn.style.marginTop = '10px';
+                btn.style.position = 'relative';
+                btn.style.zIndex = '20'; // Garantir que fique acima de tudo
+                btn.style.display = 'inline-block';
+                btn.style.padding = '10px 20px'; // Botão um pouco menor
+                btn.style.fontSize = '0.95rem'; // Fonte um pouco menor
+            }
+        });
+        
+        // Ajustar controles de navegação do slider para mobile
+        const sliderControls = document.querySelectorAll('.hero-dots');
+        sliderControls.forEach(control => {
+            if (window.innerWidth <= 768) {
+                control.style.bottom = '10px'; // Mais próximo da borda inferior
+            }
+        });
+    };
+    
+    // Executar alinhamento no carregamento da página
+    alignTextElements();
+    
+    // Executar novamente quando a janela for redimensionada
+    window.addEventListener('resize', alignTextElements);
     
     // Alinhar títulos e textos em todas as seções
     const sectionTitles = document.querySelectorAll('section h2, section h3');
@@ -446,22 +467,10 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.style.transform = 'translateY(-50%)';
         btn.style.zIndex = '5';
         
-        // Ajustar posicionamento para evitar sobreposição com o CTA
         if (btn.classList.contains('hero-prev')) {
             btn.style.left = '20px';
         } else {
             btn.style.right = '20px';
         }
-    });
-    
-    // Garantir que os CTAs fiquem acima dos botões de navegação
-    const heroButtons = document.querySelectorAll('.hero-content .btn');
-    heroButtons.forEach(btn => {
-        btn.style.position = 'relative';
-        btn.style.zIndex = '10'; // Valor maior que o zIndex dos botões de navegação
-        btn.style.display = 'inline-block';
-        btn.style.margin = '20px auto 0';
-        btn.style.minWidth = '180px';
-        btn.style.textAlign = 'center';
     });
 });
