@@ -3,9 +3,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
     
-    menuToggle.addEventListener('click', function() {
-        nav.classList.toggle('active');
+    // Verificar se o menu-toggle existe e criar spans se necessário
+    if (menuToggle && !menuToggle.querySelector('span')) {
+        // Limpar qualquer conteúdo existente
+        menuToggle.innerHTML = '';
+        
+        // Adicionar os três spans para o ícone de hambúrguer
+        for (let i = 0; i < 3; i++) {
+            const span = document.createElement('span');
+            menuToggle.appendChild(span);
+        }
+    }
+    
+    menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+    
+    // Fechar menu ao clicar em um link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            nav.classList.remove('active');
+        });
     });
     
     // Scroll Suave
@@ -44,11 +65,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Filtro de Portfólio
+    // Filtro de Portfólio - Atualizado para incluir "igreja" e remover "praia" e "destino"
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     
+    // Atualizar texto dos botões de filtro se necessário
     filterButtons.forEach(button => {
+        const filterType = button.getAttribute('data-filter');
+        if (filterType === 'praia') {
+            button.setAttribute('data-filter', 'igreja');
+            button.textContent = 'Igreja';
+        } else if (filterType === 'destino') {
+            // Ocultar este botão ou substituir por outro se necessário
+            button.style.display = 'none';
+        }
+        
         button.addEventListener('click', function() {
             // Remover classe active de todos os botões
             filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -59,6 +90,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const filter = this.getAttribute('data-filter');
             
             portfolioItems.forEach(item => {
+                // Atualizar categorias dos itens do portfólio
+                if (item.getAttribute('data-category') === 'praia') {
+                    item.setAttribute('data-category', 'igreja');
+                }
+                
+                // Ocultar itens de "destino"
+                if (item.getAttribute('data-category') === 'destino') {
+                    item.style.display = 'none';
+                    return;
+                }
+                
                 if (filter === 'all' || item.getAttribute('data-category') === filter) {
                     item.style.display = 'block';
                 } else {
