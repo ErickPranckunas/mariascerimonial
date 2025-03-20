@@ -15,10 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        nav.classList.toggle('active');
-    });
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+    }
     
     // Fechar menu ao clicar em um link
     const navLinks = document.querySelectorAll('nav ul li a');
@@ -76,21 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Filtro de Portfólio - Atualizado para incluir "igreja" e remover "praia" e "destino"
+    // Filtro de Portfólio
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     
-    // Atualizar texto dos botões de filtro se necessário
     filterButtons.forEach(button => {
-        const filterType = button.getAttribute('data-filter');
-        if (filterType === 'praia') {
-            button.setAttribute('data-filter', 'igreja');
-            button.textContent = 'Igreja';
-        } else if (filterType === 'destino') {
-            // Ocultar este botão ou substituir por outro se necessário
-            button.style.display = 'none';
-        }
-        
         button.addEventListener('click', function() {
             // Remover classe active de todos os botões
             filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -101,17 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const filter = this.getAttribute('data-filter');
             
             portfolioItems.forEach(item => {
-                // Atualizar categorias dos itens do portfólio
-                if (item.getAttribute('data-category') === 'praia') {
-                    item.setAttribute('data-category', 'igreja');
-                }
-                
-                // Ocultar itens de "destino"
-                if (item.getAttribute('data-category') === 'destino') {
-                    item.style.display = 'none';
-                    return;
-                }
-                
                 if (filter === 'all' || item.getAttribute('data-category') === filter) {
                     item.style.display = 'block';
                 } else {
@@ -122,40 +103,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Slider de Depoimentos
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
+    let testimonialCurrentSlide = 0;
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const testimonialPrevBtn = document.querySelector('.prev-btn');
+    const testimonialNextBtn = document.querySelector('.next-btn');
     
-    function showSlide(index) {
-        slides.forEach(slide => {
+    function showTestimonialSlide(index) {
+        testimonialSlides.forEach(slide => {
             slide.style.display = 'none';
         });
         
-        slides[index].style.display = 'block';
+        testimonialSlides[index].style.display = 'block';
     }
     
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+    function nextTestimonialSlide() {
+        testimonialCurrentSlide = (testimonialCurrentSlide + 1) % testimonialSlides.length;
+        showTestimonialSlide(testimonialCurrentSlide);
     }
     
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
+    function prevTestimonialSlide() {
+        testimonialCurrentSlide = (testimonialCurrentSlide - 1 + testimonialSlides.length) % testimonialSlides.length;
+        showTestimonialSlide(testimonialCurrentSlide);
     }
     
-    // Inicializar slider
-    showSlide(currentSlide);
-    
-    // Event listeners para botões de navegação
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
+    // Inicializar slider de depoimentos
+    if (testimonialSlides.length > 0) {
+        showTestimonialSlide(testimonialCurrentSlide);
+        
+        // Event listeners para botões de navegação
+        if (testimonialPrevBtn && testimonialNextBtn) {
+            testimonialPrevBtn.addEventListener('click', prevTestimonialSlide);
+            testimonialNextBtn.addEventListener('click', nextTestimonialSlide);
+        }
+        
+        // Auto-rotação do slider
+        setInterval(nextTestimonialSlide, 5000);
     }
-    
-    // Auto-rotação do slider
-    setInterval(nextSlide, 5000);
     
     // Formulário de Contato
     const contactForm = document.getElementById('contactForm');
@@ -221,42 +204,24 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     
     // Function to update the active slide
-    // Hero Slider Functionality - Correção para a segunda categoria
+    // Function to update the active slide
     function updateHeroSlide(index) {
         // Remove active class from all slides and dots
         heroSlides.forEach(slide => {
             slide.classList.remove('active');
-            slide.style.visibility = 'hidden';
-            slide.style.opacity = '0';
-            slide.style.zIndex = '0';
+            slide.style.visibility = 'hidden'; // Ensure slides are hidden when not active
+            slide.style.opacity = '0'; // Ensure slides are transparent when not active
         });
         
         heroDots.forEach(dot => dot.classList.remove('active'));
         
         // Add active class to current slide and dot
         heroSlides[index].classList.add('active');
-        heroSlides[index].style.visibility = 'visible';
-        heroSlides[index].style.opacity = '1';
-        heroSlides[index].style.zIndex = '2';
-        
+        heroSlides[index].style.visibility = 'visible'; // Make the active slide visible
+        heroSlides[index].style.opacity = '1'; // Make the active slide opaque
         heroDots[index].classList.add('active');
         
-        // Garantir que o conteúdo e o botão estejam visíveis
-        const currentContent = heroSlides[index].querySelector('.hero-content');
-        const currentButton = heroSlides[index].querySelector('.btn');
-        
-        if (currentContent) {
-            currentContent.style.opacity = '1';
-            currentContent.style.visibility = 'visible';
-        }
-        
-        if (currentButton) {
-            currentButton.style.display = 'inline-block';
-            currentButton.style.opacity = '1';
-            currentButton.style.visibility = 'visible';
-        }
-        
-        // Atualizar a imagem de fundo da seção hero
+        // Update the background image of the hero section
         const heroSection = document.querySelector('.hero');
         if (heroSection) {
             heroSection.style.backgroundImage = `url(${backgroundImages[index]})`;
@@ -270,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Garantir que o primeiro slide esteja ativo no carregamento
         updateHeroSlide(0);
         
-        // Resto do código permanece igual...
         // Definir a imagem inicial
         const heroSection = document.querySelector('.hero');
         if (heroSection) {
@@ -309,168 +273,193 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // Adicionar classe para alinhamento de texto em todos os slides e seções
-    const alignTextElements = () => {
-        // Alinhar textos nos slides do hero
-        const heroContents = document.querySelectorAll('.hero-content');
-        heroContents.forEach((content, index) => {
-            // Redefinir estilos para evitar conflitos
-            content.style.display = 'block';
-            content.style.position = 'absolute';
-            content.style.textAlign = 'center';
+    // Navegação entre seções
+    const sectionNavItems = document.querySelectorAll('.section-nav-item');
+    const sections = document.querySelectorAll('section[id]');
+    const scrollDown = document.getElementById('scrollDown');
+    
+    // Atualizar navegação ativa durante o scroll
+    function updateSectionNav() {
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
             
-            // Posicionamento básico
-            content.style.width = '100%';
-            content.style.left = '0';
-            content.style.right = '0';
-            content.style.margin = '0 auto';
-            
-            // Posicionamento vertical - posicionar mais abaixo
-            content.style.top = '65%'; // Usar top em vez de bottom
-            content.style.bottom = 'auto';
-            content.style.transform = 'none';
-            
-            content.style.padding = '0 20px';
-            
-            // Ajuste específico para o primeiro slide (casamento)
-            if (index === 0) {
-                content.style.top = '65%'; // Mesmo valor para manter consistência
-                content.style.maxWidth = '100%';
-                content.style.boxSizing = 'border-box';
-            }
-            
-            // Ajustes responsivos para dispositivos móveis
-            if (window.innerWidth <= 768) {
-                content.style.top = '55%'; // Posicionar mais acima em telas pequenas
-                content.style.padding = '0 15px 60px'; // Mais espaço abaixo para o botão
-                
-                // Ajuste específico para o slide corporativo em mobile
-                if (index === 1) {
-                    content.style.top = '50%'; // Ainda mais acima para o slide corporativo
-                }
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                document.querySelector(`.section-nav-item[data-section="${sectionId}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.section-nav-item[data-section="${sectionId}"]`).classList.remove('active');
             }
         });
         
-        // Alinhar títulos em todos os slides com alinhamento perfeito
-        const slideTitles = document.querySelectorAll('.hero-slide h1, .hero-slide h2, .hero-content h1, .hero-content h2');
-        slideTitles.forEach((title) => {
-            title.style.textAlign = 'center';
-            title.style.width = '100%';
-            title.style.margin = '0 auto 20px auto';
-            title.style.maxWidth = '800px';
-            title.style.lineHeight = '1.2';
-            title.style.display = 'block';
-            title.style.position = 'relative';
-            
-            // Ajuste específico para o título do primeiro slide
-            if (title.textContent.includes('Transformamos')) {
-                title.style.fontSize = 'calc(2.2rem + 1vw)';
-                title.style.marginBottom = '20px';
-                title.style.maxWidth = '100%';
-            }
-            
-            // Ajustes responsivos para dispositivos móveis
-            if (window.innerWidth <= 768) {
-                title.style.fontSize = 'calc(1.8rem + 1vw)'; // Fonte menor em mobile
-                title.style.marginBottom = '15px'; // Menos espaço abaixo
-                title.style.lineHeight = '1.3'; // Melhor espaçamento entre linhas
-            }
-        });
-        
-        // Ajustes para parágrafos em dispositivos móveis
-        const slideDescriptions = document.querySelectorAll('.hero-content p:not(.btn)');
-        slideDescriptions.forEach(desc => {
-            // Ajustes responsivos para dispositivos móveis
-            if (window.innerWidth <= 768) {
-                desc.style.fontSize = 'calc(0.9rem + 0.2vw)'; // Fonte menor
-                desc.style.marginBottom = '15px'; // Menos espaço
-                desc.style.maxWidth = '100%'; // Largura total
-            }
-        });
-        
-        // Ajustes para botões em dispositivos móveis
-        const heroButtons = document.querySelectorAll('.hero-content .btn');
-        heroButtons.forEach(btn => {
-            // Ajustes responsivos para dispositivos móveis
-            if (window.innerWidth <= 768) {
-                btn.style.marginTop = '10px';
-                btn.style.position = 'relative';
-                btn.style.zIndex = '20'; // Garantir que fique acima de tudo
-                btn.style.display = 'inline-block';
-                btn.style.padding = '10px 20px'; // Botão um pouco menor
-                btn.style.fontSize = '0.95rem'; // Fonte um pouco menor
-            }
-        });
-        
-        // Ajustar controles de navegação do slider para mobile
-        const sliderControls = document.querySelectorAll('.hero-dots');
-        sliderControls.forEach(control => {
-            if (window.innerWidth <= 768) {
-                control.style.bottom = '10px'; // Mais próximo da borda inferior
-            }
-        });
-    };
-    
-    // Executar alinhamento no carregamento da página
-    alignTextElements();
-    
-    // Executar novamente quando a janela for redimensionada
-    window.addEventListener('resize', alignTextElements);
-    
-    // Alinhar títulos e textos em todas as seções
-    const sectionTitles = document.querySelectorAll('section h2, section h3');
-    sectionTitles.forEach(title => {
-        title.style.textAlign = 'center';
-        title.style.width = '100%';
-        title.style.margin = '0 auto 20px auto';
-        title.style.maxWidth = '800px';
-    });
-    
-    // Alinhar parágrafos descritivos em todas as seções
-    const sectionTexts = document.querySelectorAll('section p:not(.btn)');
-    sectionTexts.forEach(text => {
-        text.style.textAlign = 'center';
-        text.style.width = '100%';
-        text.style.maxWidth = '800px';
-        text.style.margin = '0 auto 20px auto';
-    });
-    
-    // Centralizar todos os botões/CTAs em todas as seções
-    const ctaButtons = document.querySelectorAll('.btn, button[type="submit"]');
-    ctaButtons.forEach(btn => {
-        const parent = btn.parentElement;
-        parent.style.textAlign = 'center';
-        parent.style.width = '100%';
-        
-        btn.style.display = 'inline-block';
-        btn.style.margin = '0 auto';
-        btn.style.minWidth = '180px';
-        btn.style.textAlign = 'center';
-    });
-    
-    // Ajustar controles de navegação do slider
-    const sliderControls = document.querySelectorAll('.hero-dots');
-    sliderControls.forEach(control => {
-        control.style.position = 'absolute';
-        control.style.bottom = '20px';
-        control.style.width = '100%';
-        control.style.display = 'flex';
-        control.style.justifyContent = 'center';
-        control.style.zIndex = '5';
-    });
-    
-    // Ajustar botões de navegação prev/next
-    const navButtons = document.querySelectorAll('.hero-prev, .hero-next');
-    navButtons.forEach(btn => {
-        btn.style.position = 'absolute';
-        btn.style.top = '50%';
-        btn.style.transform = 'translateY(-50%)';
-        btn.style.zIndex = '5';
-        
-        if (btn.classList.contains('hero-prev')) {
-            btn.style.left = '20px';
+        // Esconder/mostrar seta para baixo
+        if (scrollY > 100) {
+            scrollDown.style.opacity = '0';
+            scrollDown.style.visibility = 'hidden';
         } else {
-            btn.style.right = '20px';
+            scrollDown.style.opacity = '1';
+            scrollDown.style.visibility = 'visible';
+        }
+    }
+    
+    // Adicionar event listeners para os itens de navegação
+    sectionNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const sectionId = item.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
+            
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Adicionar event listener para a seta para baixo
+    if (scrollDown) {
+        scrollDown.addEventListener('click', () => {
+            const nextSection = document.querySelector('section:nth-of-type(2)');
+            if (nextSection) {
+                window.scrollTo({
+                    top: nextSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+    
+    // Atualizar navegação no scroll
+    window.addEventListener('scroll', updateSectionNav);
+    
+    // Inicializar navegação
+    updateSectionNav();
+    
+    // Remover qualquer lista de navegação duplicada fora do footer
+    document.querySelectorAll('body > ul').forEach(ul => {
+        // Verificar se esta é uma lista de navegação não intencional
+        if (!ul.closest('footer') && !ul.closest('header') && !ul.closest('nav')) {
+            ul.remove();
         }
     });
+});
+
+// Corrigir navegação para o contato
+document.querySelectorAll('a[href="#contato"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const contactSection = document.getElementById('contato');
+        if (contactSection) {
+            // Adiciona um pequeno atraso para garantir que a rolagem funcione corretamente
+            setTimeout(() => {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    });
+});
+
+// Corrigir problema de navegação no footer
+document.querySelectorAll('.footer-links a, .mobile-footer-nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+            e.preventDefault();
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+});
+
+// Navegação do Hero Slider
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    const prevBtn = document.querySelector('.hero-prev');
+    const nextBtn = document.querySelector('.hero-next');
+    let currentSlide = 0;
+    
+    // Função para mostrar um slide específico
+    function showSlide(index) {
+        // Esconde todos os slides
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // Remove a classe active de todos os dots
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        // Mostra o slide atual
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+    }
+    
+    // Event listeners para os botões de navegação
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            let newIndex = currentSlide - 1;
+            if (newIndex < 0) newIndex = slides.length - 1;
+            showSlide(newIndex);
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            let newIndex = currentSlide + 1;
+            if (newIndex >= slides.length) newIndex = 0;
+            showSlide(newIndex);
+        });
+    }
+    
+    // Event listeners para os dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            showSlide(index);
+        });
+    });
+    
+    // Autoplay opcional
+    setInterval(function() {
+        let newIndex = currentSlide + 1;
+        if (newIndex >= slides.length) newIndex = 0;
+        showSlide(newIndex);
+    }, 5000); // Muda a cada 5 segundos
+});
+
+// Add this to your existing script.js file
+document.addEventListener('DOMContentLoaded', function() {
+    // Highlight active navigation item based on scroll position
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    const sections = document.querySelectorAll('section[id]');
+    
+    function highlightNavItem() {
+        const scrollY = window.scrollY;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                // Remove active class from all links
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to current section link
+                document.querySelector(`header nav ul li a[href="#${sectionId}"]`).classList.add('active');
+            }
+        });
+    }
+    
+    // Initial call to highlight the correct nav item
+    highlightNavItem();
+    
+    // Add event listener for scroll
+    window.addEventListener('scroll', highlightNavItem);
 });

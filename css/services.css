@@ -1,0 +1,90 @@
+/* Services Section */
+.services {
+    padding: 80px 0;
+}
+
+.services .section-header {
+    margin-bottom: 40px;  /* Reduzindo um pouco o espaço do título */
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  /* Voltando para 280px */
+    gap: 25px;  /* Reduzindo um pouco o espaço entre os cards */
+    margin-top: 25px;
+}
+
+.service-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 25px;  /* Reduzindo o padding interno */
+    text-align: left;  /* Alinhando o texto à esquerda */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-icon {
+    margin-bottom: 15px;  /* Reduzindo o espaço abaixo do ícone */
+    font-size: 1.5rem;  /* Reduzindo ainda mais o tamanho da fonte */
+    color: #d4af37;
+    text-align: center;  /* Mantendo o ícone centralizado */
+}
+
+.service-icon i {
+    display: inline-block;
+    width: 50px;  /* Reduzindo mais o tamanho do círculo */
+    height: 50px;  /* Reduzindo mais o tamanho do círculo */
+    line-height: 50px;  /* Ajustando a linha */
+    border-radius: 50%;
+    background-color: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    transition: all 0.3s ease;
+}
+
+.service-card h3 {
+    margin-bottom: 12px;  /* Reduzindo o espaço abaixo do título */
+    font-size: 1.3rem;  /* Reduzindo o tamanho do título */
+    text-align: center;  /* Centralizando o título */
+}
+
+.service-card p {
+    font-size: 0.85rem;  /* Reduzindo o tamanho do texto */
+    color: var(--text-color);
+    line-height: 1.4;  /* Reduzindo a altura da linha */
+}
+
+/* Media queries para responsividade */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-card {
+        height: auto;
+    }
+}
+
+/* Esconder botões responsivos abaixo do footer */
+.section-nav {
+    display: none !important;
+}
+
+.scroll-down {
+    display: none !important;
+}
+
+/* Para dispositivos móveis */
+@media (max-width: 768px) {
+    .mobile-footer-nav,
+    .section-nav-item,
+    body > .section-nav,
+    body > .scroll-down {
+        display: none !important;
+    }
+}

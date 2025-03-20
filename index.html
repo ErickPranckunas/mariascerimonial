@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maria's Cerimonial - Realizando Sonhos de Casamento</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Verifique se esta linha está no <head> do seu documento -->
+    
+    <!-- Importando arquivos CSS individualmente -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/testimonials.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/footer.css">
+    
+    <!-- Fontes e ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -38,6 +49,7 @@
     <section id="inicio" class="hero">
         <div class="overlay"></div>
         <div class="container">
+            <!-- Trecho do hero slider no index.html -->
             <div class="hero-slider">
                 <div class="hero-slide active">
                     <div class="hero-content">
@@ -55,12 +67,13 @@
                 </div>
                 <div class="hero-slide">
                     <div class="hero-content">
-                        <h1>Fazemos formaturas</h1>
-                        <p>Celebre sua conquista acadêmica com elegância e sofisticação</p>
+                        <h1>Celebre sua formatura com estilo</h1>
+                        <p>Transformamos conquistas acadêmicas em celebrações únicas</p>
                         <a href="#contato" class="btn">Saiba Mais</a>
                     </div>
                 </div>
             </div>
+            <!-- Adicione este código dentro da div.container na seção hero, logo após o fechamento da div.hero-slider -->
             <div class="hero-controls">
                 <button class="hero-prev"><i class="fas fa-chevron-left"></i></button>
                 <div class="hero-dots">
@@ -208,50 +221,50 @@
         </div>
     </section>
 
-    <section id="depoimentos" class="testimonials">
+    <section id="depoimentos" class="testimonials-section">
         <div class="container">
-            <div class="section-header">
-                <h2>Depoimentos</h2>
-                <p>O que nossos clientes dizem sobre nós</p>
-            </div>
+            <h2>DEPOIMENTOS</h2>
+            <p class="section-subtitle">O que nossos clientes dizem sobre nós</p>
+            
             <div class="testimonial-slider">
                 <div class="testimonial-slide">
                     <div class="testimonial-content">
-                        <p>"A equipe da Maria's Cerimonial superou todas as nossas expectativas. Cada detalhe foi cuidado com carinho e atenção, tornando nosso casamento um sonho realizado."</p>
-                        <div class="client-info">
-                            <img src="images/client1.jpg" alt="Cliente">
-                            <div>
-                                <h4>Ana & Pedro</h4>
-                                <p>Casamento em Junho de 2023</p>
-                            </div>
+                        "Mesmo com todas as complicações de um casamento no exterior, a Maria's Cerimonial cuidou de tudo com maestria. Não teríamos conseguido sem eles!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <div class="testimonial-author-name">Juliana & Marcos</div>
+                            <div class="testimonial-author-title">Casamento em Setembro de 2022</div>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-slide">
+                
+                <!-- Adicione mais slides conforme necessário -->
+                <div class="testimonial-slide" style="display: none;">
                     <div class="testimonial-content">
-                        <p>"Contratar a Maria's foi a melhor decisão que tomamos. Profissionalismo, dedicação e criatividade definem essa equipe incrível. Nosso casamento na praia foi perfeito!"</p>
-                        <div class="client-info">
-                            <img src="images/client2.jpg" alt="Cliente">
-                            <div>
-                                <h4>Mariana & João</h4>
-                                <p>Casamento em Dezembro de 2022</p>
-                            </div>
+                        "A equipe da Maria's transformou nossa formatura em um evento inesquecível. Profissionalismo e atenção aos detalhes impecáveis!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <div class="testimonial-author-name">Turma de Engenharia 2023</div>
+                            <div class="testimonial-author-title">Formatura em Dezembro de 2023</div>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-slide">
+                
+                <div class="testimonial-slide" style="display: none;">
                     <div class="testimonial-content">
-                        <p>"Mesmo com todas as complicações de um casamento no exterior, a Maria's Cerimonial cuidou de tudo com maestria. Não teríamos conseguido sem eles!"</p>
-                        <div class="client-info">
-                            <img src="images/client3.jpg" alt="Cliente">
-                            <div>
-                                <h4>Juliana & Marcos</h4>
-                                <p>Casamento em Setembro de 2022</p>
-                            </div>
+                        "Nosso evento corporativo foi um sucesso graças à organização impecável da Maria's. Todos os convidados elogiaram a qualidade do serviço."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <div class="testimonial-author-name">Tech Solutions Inc.</div>
+                            <div class="testimonial-author-title">Evento Corporativo em Março de 2023</div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <div class="testimonial-controls">
                 <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
@@ -267,7 +280,6 @@
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <!-- Campo de endereço removido -->
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>
@@ -379,6 +391,34 @@
         </div>
     </footer>
 
+    <!-- Navegação entre seções -->
+    <div class="section-nav">
+        <div class="section-nav-item active" data-section="inicio">
+            <div class="tooltip">Início</div>
+        </div>
+        <div class="section-nav-item" data-section="sobre">
+            <div class="tooltip">Sobre Nós</div>
+        </div>
+        <div class="section-nav-item" data-section="servicos">
+            <div class="tooltip">Serviços</div>
+        </div>
+        <div class="section-nav-item" data-section="portfolio">
+            <div class="tooltip">Portfólio</div>
+        </div>
+        <div class="section-nav-item" data-section="depoimentos">
+            <div class="tooltip">Depoimentos</div>
+        </div>
+        <div class="section-nav-item" data-section="contato">
+            <div class="tooltip">Contato</div>
+        </div>
+    </div>
+
+    <!-- Seta para baixo na primeira seção -->
+    <div class="scroll-down" id="scrollDown">
+        <i class="fas fa-chevron-down"></i>
+        <span>Role para baixo</span>
+    </div>
+    <!-- Scripts -->
     <script src="js/script.js"></script>
 </body>
 </html>

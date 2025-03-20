@@ -1,0 +1,189 @@
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    color: var(--light-color);
+}
+
+/* Ajuste na overlay para não cobrir os controles */
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Mantido baixo para não cobrir os controles */
+    pointer-events: none; /* Permite que os cliques passem através da overlay */
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    visibility: hidden;
+    z-index: 0;
+    padding-top: 45vh; /* Aumentado para 45vh para descer ainda mais o conteúdo */
+}
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Alterado para alinhar ao topo */
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    text-align: center;
+}
+
+.hero-content .btn {
+    display: inline-block;
+    min-width: 220px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    z-index: 10;
+    text-align: center;
+    padding: 12px 30px;
+    margin-top: 40px; /* Aumentado para dar mais espaço */
+}
+
+.hero-content .btn:hover {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+/* Controles do slider - ajustados para garantir visibilidade */
+.hero-controls {
+    position: absolute;
+    bottom: 30px; /* Posicionado mais para baixo */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200; /* Z-index muito alto para garantir que fique acima de tudo */
+    pointer-events: auto; /* Garantir que os cliques sejam registrados */
+}
+
+.hero-prev, .hero-next {
+    background: rgba(255, 255, 255, 0.8); /* Mais opaco para maior visibilidade */
+    border: none;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 20px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    position: relative; /* Adicionado para garantir que o z-index funcione */
+    z-index: 201; /* Valor ainda maior */
+}
+
+.hero-dots {
+    display: flex;
+    gap: 15px;
+    position: relative; /* Adicionado para garantir que o z-index funcione */
+    z-index: 201; /* Valor ainda maior */
+}
+
+.hero-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8); /* Mais opaco */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.hero-dot.active {
+    background: #d4af37;
+    transform: scale(1.2);
+    border-color: white;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .hero-content .btn {
+        min-width: 180px;
+    }
+    
+    .hero-controls {
+        bottom: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .hero-content .btn {
+        min-width: 160px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-controls {
+        bottom: 40px;
+    }
+}

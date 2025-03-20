@@ -1,0 +1,45 @@
+/* About Section */
+.about {
+    padding: 100px 0;
+    background-color: var(--gray-color);
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h3 {
+    font-size: 24px;
+    color: var(--accent-color);
+    margin-top: 20px;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .about-image, .about-text {
+        width: 100%;
+    }
+}

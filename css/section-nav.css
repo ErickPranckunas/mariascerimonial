@@ -1,0 +1,97 @@
+/* Navegação entre seções */
+.section-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-nav-item {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 8px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.section-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.section-nav-item.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.section-nav-item .tooltip {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.section-nav-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    right: 30px;
+}
+
+/* Seta para baixo na primeira seção */
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    color: white;
+    text-align: center;
+}
+
+.scroll-down i {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.scroll-down span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-5px) translateX(-50%);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .section-nav {
+        display: none;
+    }
+}
