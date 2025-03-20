@@ -140,20 +140,55 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(nextTestimonialSlide, 5000);
     }
     
-    // Formulário de Contato
+    // Formulário de Contato - Atualizado para Web3Forms
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
+        // Definir a URL de redirecionamento para a página atual
+        const redirectInput = contactForm.querySelector('input[name="redirect"]');
+        if (redirectInput) {
+            redirectInput.value = window.location.href + '?success=true';
+        }
+        
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Aqui você adicionaria o código para enviar o formulário via AJAX
-            // Por enquanto, apenas simulamos o envio
-            
-            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-            contactForm.reset();
+            // O Web3Forms vai processar o envio
+            console.log('Formulário enviado para o Web3Forms');
         });
     }
+    
+    // Verificar se há parâmetro de sucesso na URL e mostrar mensagem
+    function checkFormSuccess() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Criar elemento de mensagem de sucesso
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Mensagem enviada com sucesso! Entraremos em contato em breve.';
+            
+            // Inserir antes do formulário
+            const contactSection = document.getElementById('contato');
+            if (contactSection && contactForm) {
+                contactForm.parentNode.insertBefore(successMessage, contactForm);
+                
+                // Rolar até a mensagem
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Remover parâmetro da URL sem recarregar a página
+                window.history.replaceState({}, document.title, window.location.pathname);
+                
+                // Remover a mensagem após alguns segundos
+                setTimeout(() => {
+                    successMessage.style.opacity = '0';
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 500);
+                }, 5000);
+            }
+        }
+    }
+    
+    // Verificar sucesso do formulário quando a página carregar
+    checkFormSuccess();
     
     // Formulário de Newsletter
     const newsletterForm = document.getElementById('newsletterForm');

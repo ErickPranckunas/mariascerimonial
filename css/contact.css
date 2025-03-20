@@ -106,3 +106,24 @@
         margin-bottom: 10px;
     }
 }
+
+
+/* Estilo para mensagem de sucesso do formulário */
+.success-message {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border-left: 4px solid #4CAF50;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.success-message i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
