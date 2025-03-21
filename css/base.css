@@ -125,3 +125,47 @@ ul {
 .delay-3 {
     animation-delay: 0.6s;
 }
+
+
+/* Adicione estas regras ao final do arquivo */
+/* Ajustes para corrigir sobreposição entre portfólio e depoimentos */
+.portfolio {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 60px; /* Aumentando o espaço inferior */
+    margin-bottom: 30px;
+}
+
+.testimonials-section {
+    position: relative;
+    z-index: 1;
+    padding-top: 60px; /* Aumentando o espaço superior */
+    clear: both; /* Garante que a seção comece abaixo de qualquer conteúdo flutuante */
+}
+
+.portfolio-grid {
+    margin-bottom: 40px; /* Espaço adicional após a grade de portfólio */
+    overflow: hidden; /* Contém todos os elementos flutuantes */
+}
+
+footer {
+    position: relative;
+    z-index: 0;
+    margin-bottom: 0;
+}
+
+.section-nav {
+    z-index: 100;
+    right: 20px; /* Ajuste conforme necessário */
+}
+
+/* Certifique-se que o scroll-down não apareça nas seções finais */
+.scroll-down {
+    display: none;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}

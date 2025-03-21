@@ -11,6 +11,7 @@
     flex-wrap: wrap;
 }
 
+/* Os botões de filtro permanecem com o mesmo estilo */
 .filter-btn {
     background: none;
     border: none;
@@ -30,6 +31,7 @@
     border-bottom: 2px solid var(--primary-color);
 }
 
+/* O restante do CSS permanece igual */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -51,6 +53,18 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+}
+
+.portfolio-item img.position-lower-acj {
+    object-position: center 25%; /* Para Ana Clara & Jefferson */
+}
+
+.portfolio-item img.position-lower-ag {
+    object-position: center 40%; /* Para Angel & Guilherme */
+}
+
+.portfolio-item img.position-lower-aec {
+    object-position: 45% 25%; /* Para Alice & Clenio - ajustado para baixo */
 }
 
 .portfolio-overlay {

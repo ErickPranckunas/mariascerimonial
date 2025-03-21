@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
             testimonialNextBtn.addEventListener('click', nextTestimonialSlide);
         }
         
-        // Auto-rotação do slider
-        setInterval(nextTestimonialSlide, 5000);
+        // Auto-rotação do slider - alterado de 5000 para 10000 (10 segundos)
+        setInterval(nextTestimonialSlide, 10000);
     }
     
     // Formulário de Contato - Atualizado para Web3Forms
@@ -231,14 +231,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroNextBtn = document.querySelector('.hero-next');
     let heroCurrentSlide = 0;
     
-    // Imagens de fundo para cada slide
+    // Imagens de fundo para cada slide - atualizando caminhos das imagens
     const backgroundImages = [
-        'images/hero-casamento.jpg',
-        'images/hero-corporativo.jpg',
-        'images/hero-formatura.jpg'
+        'images/hero/hero-casamento.jpg',
+        'images/hero/hero-corporativo.jpg',
+        'images/hero/hero-formatura.jpg'
     ];
     
-    // Function to update the active slide
     // Function to update the active slide
     function updateHeroSlide(index) {
         // Remove active class from all slides and dots
@@ -466,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000); // Muda a cada 5 segundos
 });
 
-// Add this to your existing script.js file
+// Highlight active navigation item based on scroll position
 document.addEventListener('DOMContentLoaded', function() {
     // Highlight active navigation item based on scroll position
     const navLinks = document.querySelectorAll('header nav ul li a');
@@ -498,3 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener for scroll
     window.addEventListener('scroll', highlightNavItem);
 });
+
+// Inicializar o slider de depoimentos com a nova função
+initTestimonialSlider();
+;

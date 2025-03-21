@@ -90,11 +90,11 @@
         <div class="container">
             <div class="section-header">
                 <h2>Sobre Nós</h2>
-                <p>Conheça nossa história e paixão por realizar sonhos</p>
+                <p>Conheça nossa história e paixao por realizar sonhos</p>
             </div>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/about.jpg" alt="Equipe Maria's Cerimonial">
+                    <img src="images/equipe.jpg" alt="Equipe Maria's Cerimonial">
                 </div>
                 <div class="about-text">
                     <h3>Nossa História</h3>
@@ -147,14 +147,14 @@
                         <i class="fas fa-paint-brush"></i>
                     </div>
                     <h3>Design e Decoração</h3>
-                    <p>Fornecedores que trabalham conceitos visuais personalizados que refletem a personalidade dos noivos.</p>
+                    <p>Fornecedores que trabalham com conceitos visuais personalizados, capazes de refletir a personalidade e o estilo dos clientes para diversos tipos de eventos.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Gestão de Convidados</h3>
-                    <p>Controle de confirmações, acomodações e necessidades especiais dos seus convidados.</p>
+                    <p>Controle de confirmações, acomodações e necessidades especiais dos convidados, garantindo conforto e organização para o evento</p>
                 </div>
             </div>
         </div>
@@ -164,64 +164,66 @@
         <div class="container">
             <div class="section-header">
                 <h2>NOSSO PORTFÓLIO</h2>
-                <p>Conheça alguns dos casamentos que tivemos o prazer de organizar</p>
+                <p>Conheça alguns dos eventos que tivemos o prazer de organizar</p>
             </div>
             
-            <div class="portfolio-filter">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="tradicional">Tradicional</button>
-                <button class="filter-btn" data-filter="igreja">Igreja</button>
-                <button class="filter-btn" data-filter="campo">Campo</button>
-            </div>
+            <!-- Removendo a div de filtro -->
             
             <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="tradicional">
-                    <img src="images/portfolio/tradicional1.jpg" alt="Casamento Tradicional">
+                <div class="portfolio-item">
+                    <img src="images/portfolio/tradicional/porfolio-1.jpg" alt="Casamento Tradicional">
                     <div class="portfolio-overlay">
-                        <h3>Ana & Pedro</h3>
-                        <p>Casamento Tradicional - 2023</p>
+                        <h3>Tainara & Matheus</h3>
+                        <p>Casamento Tradicional - 2024</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="igreja">
-                    <img src="images/portfolio/igreja1.jpg" alt="Casamento na Igreja">
+                <div class="portfolio-item">
+                    <img src="images/portfolio/tradicional/aej_portfolio-2-2.jpg" alt="Casamento Tradicional" class="position-lower-acj">
                     <div class="portfolio-overlay">
-                        <h3>Mariana & João</h3>
-                        <p>Casamento na Igreja - 2022</p>
+                        <h3>Ana Clara & Jefferson</h3>
+                        <p>Casamento Tradicional - 2024</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="campo">
-                    <img src="images/portfolio/campo1.jpg" alt="Casamento no Campo">
+                <div class="portfolio-item">
+                    <img src="images/portfolio/formatura/formatura-1.jpeg" alt="Formatura">
                     <div class="portfolio-overlay">
-                        <h3>Juliana & Marcos</h3>
-                        <p>Casamento no Campo - 2022</p>
+                        <h3>Administração | Estética | Enfermagem</h3>
+                        <p>Formatura - 2025</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="igreja">
-                    <img src="images/portfolio/igreja2.jpg" alt="Casamento na Igreja">
+                <div class="portfolio-item">
+                    <img src="images/portfolio/campo/rem_portfolio-3.jpg" alt="Casamento no Campo" class="position-lower-ag">
                     <div class="portfolio-overlay">
-                        <h3>Carolina & Rafael</h3>
-                        <p>Casamento na Igreja - 2023</p>
+                        <h3>Raissa & Matheus</h3>
+                        <p>Casamento no Campo - 2024</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="tradicional">
-                    <img src="images/portfolio/tradicional2.jpg" alt="Casamento Tradicional">
+                <div class="portfolio-item">
+                    <img src="images/portfolio/tradicional/aec_portfolio-4.jpg" alt="Casamento Tradicional" class="position-lower-aec">
                     <div class="portfolio-overlay">
-                        <h3>Fernanda & Lucas</h3>
-                        <p>Casamento Tradicional - 2021</p>
+                        <h3>Alice & Clenio</h3>
+                        <p>Casamento Tradicional - 2024</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="campo">
-                    <img src="images/portfolio/campo2.jpg" alt="Casamento no Campo">
+                <div class="portfolio-item">
+                    <img src="images/portfolio/formatura/formatura-2.jpeg" alt="Formatura">
                     <div class="portfolio-overlay">
-                        <h3>Beatriz & Gabriel</h3>
-                        <p>Casamento no Campo - 2023</p>
+                        <h3>Seg. Trabalho | Enfermagem | Informática </h3>
+                        <p>Formatura - 2025</p>
                     </div>
                 </div>
+                <!-- Removendo os cards extras que estavam escondidos -->
             </div>
         </div>
     </section>
 
     <section id="depoimentos" class="testimonials-section">
+        <div class="video-background">
+            <video autoplay muted loop id="testimonial-video">
+                <source src="videos/video_casamento.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+        </div>
         <div class="container">
             <h2>DEPOIMENTOS</h2>
             <p class="section-subtitle">O que nossos clientes dizem sobre nós</p>
@@ -229,40 +231,18 @@
             <div class="testimonial-slider">
                 <div class="testimonial-slide">
                     <div class="testimonial-content">
-                        "Mesmo com todas as complicações de um casamento no exterior, a Maria's Cerimonial cuidou de tudo com maestria. Não teríamos conseguido sem eles!"
+                        "Quero agradecer imensamente a toda equipe Maria's cerimonial por me proporcionar a alegria e o sentimento mais incrível que já pude experimentar, a realização de um sonho! Casei com o amor da minha vida, gratidão por tornar este sonho ainda mais inesquecível, superando todas a expectativa. Grata pela amizade e carinho 💗"
                     </div>
                     <div class="testimonial-author">
                         <div class="testimonial-author-info">
-                            <div class="testimonial-author-name">Juliana & Marcos</div>
-                            <div class="testimonial-author-title">Casamento em Setembro de 2022</div>
+                            <div class="testimonial-author-name">Josi & Angelo</div>
+                            <div class="testimonial-author-title">Casamento em Janeiro de 2025</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Adicione mais slides conforme necessário -->
-                <div class="testimonial-slide" style="display: none;">
-                    <div class="testimonial-content">
-                        "A equipe da Maria's transformou nossa formatura em um evento inesquecível. Profissionalismo e atenção aos detalhes impecáveis!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="testimonial-author-info">
-                            <div class="testimonial-author-name">Turma de Engenharia 2023</div>
-                            <div class="testimonial-author-title">Formatura em Dezembro de 2023</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-slide" style="display: none;">
-                    <div class="testimonial-content">
-                        "Nosso evento corporativo foi um sucesso graças à organização impecável da Maria's. Todos os convidados elogiaram a qualidade do serviço."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="testimonial-author-info">
-                            <div class="testimonial-author-name">Tech Solutions Inc.</div>
-                            <div class="testimonial-author-title">Evento Corporativo em Março de 2023</div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Depoimentos temporariamente ocultos - serão adicionados no futuro -->
+                <!-- ... -->
             </div>
             
             <div class="testimonial-controls">
@@ -377,8 +357,8 @@
                     <p>Estamos prontos para transformar seu sonho em realidade</p>
                     <div class="footer-contact-info">
                         <div class="footer-contact-item">
-                            <a href="mailto:contato@mariascerimonial.com.br">
-                                <i class="fas fa-envelope"></i> contato@mariascerimonial.com.br
+                            <a href="mailto:mariasacerimonial@gmail.com">
+                                <i class="fas fa-envelope"></i> mariasacerimonial@gmail.com
                             </a>
                         </div>
                         <div class="footer-contact-item">
