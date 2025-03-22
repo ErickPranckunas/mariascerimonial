@@ -72,7 +72,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) 70%, transparent); /* Gradiente mais escuro */
     color: white;
     padding: 15px;
     transform: translateY(0);
@@ -82,12 +82,14 @@
 .portfolio-overlay h3 {
     margin: 0 0 5px;
     font-size: 1.1rem;
+    color: #d4af37; /* Tom dourado para os nomes */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Sombra para melhorar legibilidade */
 }
 
 .portfolio-overlay p {
     margin: 0;
     font-size: 0.9rem;
-    opacity: 0.8;
+    opacity: 0.9; /* Aumentado de 0.8 para 0.9 */
 }
 
 .portfolio-item:hover img {

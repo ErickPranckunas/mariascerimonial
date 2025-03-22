@@ -19,10 +19,11 @@ header .container {
 .logo {
     display: flex;
     align-items: center;
+    padding-top: 5px; /* Added padding to move logo down slightly */
 }
 
 .logo img {
-    max-height: 40px;
+    height: 40px;
     width: auto;
 }
 
