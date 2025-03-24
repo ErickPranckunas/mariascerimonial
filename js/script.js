@@ -486,7 +486,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Add active class to current section link
-                document.querySelector(`header nav ul li a[href="#${sectionId}"]`).classList.add('active');
+                const activeLink = document.querySelector(`header nav ul li a[href="#${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
             }
         });
     }
@@ -498,6 +501,86 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', highlightNavItem);
 });
 
-// Inicializar o slider de depoimentos com a nova função
-initTestimonialSlider();
-;
+// Remover a linha que causa o problema - não existe essa função
+// initTestimonialSlide();
+
+// Add phone input mask
+const phoneInput = document.getElementById('phone');
+if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        
+        // Limit to 11 digits
+        if (value.length > 11) {
+            value = value.slice(0, 11);
+        }
+        
+        // Format as (XX) XXXXX-XXXX
+        if (value.length > 0) {
+            if (value.length <= 2) {
+                value = `(${value}`;
+            } else if (value.length <= 7) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            } else {
+                value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+            }
+        }
+        
+        e.target.value = value;
+    });
+}
+
+// Ensure the CSRF token generation is properly implemented
+document.addEventListener('DOMContentLoaded', function() {
+    // Generate and set CSRF token for the form
+    const csrfToken = generateCSRFToken();
+    const csrfInput = document.getElementById('csrf_token');
+    if (csrfInput) {
+        csrfInput.value = csrfToken;
+        
+        // Store the token in sessionStorage for validation
+        sessionStorage.setItem('csrf_token', csrfToken);
+    }
+    
+    // Add form validation
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            // Basic client-side validation
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            if (name.length < 2) {
+                alert('Por favor, insira um nome válido.');
+                event.preventDefault();
+                return false;
+            }
+            
+            // Improved email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                alert('Por favor, insira um endereço de e-mail válido.');
+                event.preventDefault();
+                return false;
+            }
+            
+            // Brazilian phone validation with DDD (XX) and 9 digits
+            // Remove all non-digit characters for validation
+            const phoneDigitsOnly = phone.replace(/\D/g, '');
+            
+            // Check if the phone has exactly 11 digits (2 for DDD + 9 for the number)
+            if (!phoneDigitsOnly || phoneDigitsOnly.length !== 11) {
+                alert('Por favor, insira um número de telefone válido com DDD e 9 dígitos (total de 11 números).');
+                event.preventDefault();
+                return false;
+            }
+        });
+    }
+});
+
+// Function to generate CSRF token if not already defined
+function generateCSRFToken() {
+    return Math.random().toString(36).substring(2, 15) + 
+           Math.random().toString(36).substring(2, 15);
+}
